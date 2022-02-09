@@ -1,0 +1,22 @@
+inherit = "config/common/vad.toml"
+
+[meta]
+save_dir = "experiments"
+use_amp = false
+
+[train_dataset]
+[train_dataset.args]
+
+[train_dataset.dataloader]
+batch_size = 16
+num_workers = 0
+shuffle = true
+
+[trainer]
+path = "trainer.vad_trainer.Trainer"
+[trainer.train]
+save_checkpoint_interval = 1
+[trainer.validation]
+validation_interval = 1
+[trainer.visualization]
+num_workers = 0

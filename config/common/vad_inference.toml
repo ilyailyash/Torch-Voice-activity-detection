@@ -1,0 +1,32 @@
+[acoustic]
+sr = 16000
+n_fft = 320
+win_length = 320
+hop_length = 160
+center = true
+n_mel = 80
+
+[inferencer]
+path = "inferencer.VAD_Inferencer.Inferencer"
+type =  "mel"
+[inferencer.args]
+sr = 16000
+
+[dataset]
+path = "dataset.inference_dataset.Dataset"
+[dataset.args]
+path = "/media/administrator/Data/train-clean-100/test/for_devs"
+
+
+[model]
+path = "model.vad_model.CrnVad"
+[model.args]
+rnn_layers=1
+rnn_units=128
+kernel_num=[1, 32, 64, 128, 128]
+fc_hidden_dim=128
+fft_len=320
+look_ahead=1
+use_offline_norm = false
+use_cumulative_norm = true
+spec_size=80

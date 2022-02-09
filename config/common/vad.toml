@@ -1,0 +1,97 @@
+[meta]
+save_dir = "experiments"
+description = "This is a description of VAD VK experiment."
+seed = 0  # set random seed for random, numpy, pytorch-gpu and pytorch-cpu
+keep_reproducibility = false  # see https://pytorch.org/docs/stable/notes/randomness.html
+use_amp = false  # use automatic mixed precision, it will benefits Tensor Core-enabled GPU (e.g. Volta, Turing, Ampere). 2-3X speedup。
+
+[acoustic]
+sr = 16000
+n_fft = 320
+win_length = 320
+hop_length = 160
+center = true
+n_mel = 80
+
+[train_dataset]
+path = "dataset.LibriSpeech_train.Dataset"
+[train_dataset.args]
+clean_dataset = "/media/administrator/Data/train-clean-100/LibriSpeech/train-clean-100_wav"
+clean_dataset_limit = false
+clean_dataset_offset = 0
+noise_dataset = "/media/administrator/Data/DNS-Challenge/datasets/noise"
+noise_dataset_limit = false
+noise_dataset_offset = 0
+rir_dataset = "/media/administrator/Data/DNS-Challenge/datasets/impulse_responses"
+rir_dataset_limit = false
+rir_dataset_offset = 0
+snr_range = [-5, 20]
+reverb_proportion = 0.5
+silence_length = 0.2
+target_dB_FS = -25
+target_dB_FS_floating_value = 10
+sr = 16000
+pre_load_clean_dataset = false
+pre_load_noise = false
+pre_load_rir = false
+num_workers = 36
+vad_mode = 1
+data_bit = 16
+noise_proportion = 0.9
+
+[train_dataset.dataloader]
+batch_size = 16
+num_workers = 10
+shuffle = true
+pin_memory = false
+drop_last = true
+[train_dataset.collate_fn]
+path = "dataset.collator.collate_fn"
+
+
+[validation_dataset]
+path = "dataset.validation_dataset.Dataset"
+[validation_dataset.args]
+dataset_dir = "/media/administrator/Data/train-clean-100/val/LibriSpeech/dev-noisy"
+sr = 16000
+
+[model]
+path = "model.vad_model.CrnVad"
+[model.args]
+rnn_layers=1
+rnn_units=128
+kernel_num=[1, 32, 64, 128, 128,]
+fc_hidden_dim=128
+fft_len=320
+look_ahead=1
+use_offline_norm = true
+use_cumulative_norm = false
+spec_size=80
+
+[loss_function]
+path = "model.loss.masked_cross_entropy_loss"
+[loss_function.args]
+reduction = 'none'
+silent_weight = 4
+
+[optimizer]
+lr = 1e-4
+beta1 = 0.9
+beta2 = 0.999
+weight_decay = 1e-3
+
+[scheduler]
+mode = 'max'
+
+[trainer]
+path = "trainer.vad_trainer.Trainer"
+[trainer.train]
+epochs = 9999
+save_checkpoint_interval = 10
+clip_grad_norm_value = 5
+[trainer.validation]
+validation_interval = 1
+save_max_metric_score = true
+[trainer.visualization]
+num_workers = 36
+metrics = ["ROC_AUC", "EER", "FNR_1_FPR", "FPR_1_FNR"]

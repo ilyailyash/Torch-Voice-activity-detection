@@ -1,0 +1,14 @@
+inherit = "config/common/vad_100.toml"
+
+[model]
+path = "model.vad_model.CrnVad"
+[model.args]
+rnn_layers=2
+rnn_units=128
+kernel_num=[1, 32, 64, 128, 256,]
+fc_hidden_dim=128
+fft_len=320
+look_ahead=2
+use_offline_norm = false
+use_cumulative_norm = true
+spec_size=80
