@@ -42,9 +42,11 @@ MLP has 1 hidden layer with 128 neurons.
 
 Model was strongly inspired by [DCRNN](https://github.com/liyaguang/DCRNN).
 
-And used hints in parameters discovered in [Voxseg](https://github.com/NickWilkinson37/voxseg), [NAS_VAD](https://github.com/daniel03c1/nas_vad), 
-[Unsupervised Representation Learning for Speech Activity Detection in the Fearless Steps Challenge 2021](https://www.isca-speech.org/archive/pdfs/interspeech_2021/gimeno21_interspeech.pdf),
-[A Lightweight Framework for Online Voice Activity Detection in the Wild](https://www.isca-speech.org/archive/pdfs/interspeech_2021/xu21b_interspeech.pdf)
+And used hints in parameters discovered in:
+- [Voxseg](https://github.com/NickWilkinson37/voxseg), 
+- [NAS_VAD](https://github.com/daniel03c1/nas_vad), 
+- [Unsupervised Representation Learning for Speech Activity Detection in the Fearless Steps Challenge 2021](https://www.isca-speech.org/archive/pdfs/interspeech_2021/gimeno21_interspeech.pdf),
+- [A Lightweight Framework for Online Voice Activity Detection in the Wild](https://www.isca-speech.org/archive/pdfs/interspeech_2021/xu21b_interspeech.pdf)
 
 Also, good example of RT VAD is [Silero VAD](https://github.com/snakers4/silero-vad) which could be used for knowledge against [webrtcvad](https://github.com/wiseman/py-webrtcvad).
 
@@ -60,4 +62,9 @@ ROC_AUC was used as a main quality metric over model.
 EER, FPR with 1% FNR and FNR with 1% FPR was calculated during validation. More details `src/utils/metrics.py`
 
 [python-compute-eer](https://github.com/YuanGongND/python-compute-eer)
+
+## Optimisation
+Model was trained using [AdamW](https://pytorch.org/docs/stable/generated/torch.optim.AdamW.html) optimiser with LR=1e-4 and weight_decay=1e-3.
+
+[ReduceLROnPlateau](https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.ReduceLROnPlateau.html) was used as LR Scheduler.  
     
