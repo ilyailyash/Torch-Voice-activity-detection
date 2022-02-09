@@ -125,9 +125,12 @@ class Trainer(BaseTrainer):
                                        desc="Validation"):
             assert noisy.shape[0] == 1, "The batch size of validation stage must be one."
 
-            noisy_amp = self.mel_spectrogram(noisy).to(self.rank)
-
+            noisy = noisy.to(self.rank)
             labels = labels.to(self.rank)
+
+            self.mel_spectrogram = self.mel_spectrogram.to(self.rank)
+
+            noisy_amp = self.mel_spectrogram(noisy)
 
             pred_scores = self.model(noisy_amp.unsqueeze(1))
             pred_scores = pred_scores[:, :labels.size(-1)]

@@ -64,6 +64,26 @@ def compute_thresholds(label, pred, positive_label=1):
     return eer_threshold, eer, fpr_1_threshold, fpr_1_fnr, fnr_1_threshold, fnr_1_fpr
 
 
+def get_f1(pred_labels, labels):
+    TP = (pred_labels[labels == 1] == 1).sum()
+    FP = (pred_labels[labels == 0] == 1).sum()
+    TN = (pred_labels[labels == 0] == 0).sum()
+    FN = (pred_labels[labels == 1] == 0).sum()
+
+    if FP == TN == 0:
+        fpr = 1
+    else:
+        fpr = FP / (FP + TN)
+
+    fnr = FN / (FN + TP)
+
+    precision = TP / (TP + FP)
+    recall = TP / (TP + FN)
+    f1 = 2 * (precision * recall) / (precision + recall)
+
+    return f1, fpr, fnr, precision, recall
+
+
 # Only registered metric can be used.
 REGISTERED_METRICS = {
     "ROC_AUC": ROC_AUC,

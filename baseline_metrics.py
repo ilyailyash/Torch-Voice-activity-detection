@@ -8,6 +8,7 @@ from tqdm import tqdm
 from glob import glob
 
 from src.util.acoustic_utils import read_wave, Frame, frame_generator
+from src.util.metrics import get_f1
 
 
 def baseline_metrics(dataset_dir, vad_mode=1):
@@ -19,6 +20,8 @@ def baseline_metrics(dataset_dir, vad_mode=1):
     total_f1 = 0
     total_fpr = 0
     total_fnr = 0
+    total_precision = 0
+    total_recall = 0
 
     for i, (file_path) in tqdm(enumerate(noisy_files_list), total=len(noisy_files_list)):
 
@@ -33,28 +36,20 @@ def baseline_metrics(dataset_dir, vad_mode=1):
 
         labels = torch.load(labels_file_name).numpy()
 
-        TP = (pred_labels[labels == 1] == 1).sum()
-        FP = (pred_labels[labels == 0] == 1).sum()
-        TN = (pred_labels[labels == 0] == 0).sum()
-        FN = (pred_labels[labels == 1] == 0).sum()
+        f1, fpr, fnr, precision, recall = get_f1(pred_labels, labels)
 
-        if FP == TN == 0:
-            total_fpr += 1
-        else:
-            total_fpr += FP/(FP+TN)
-
-        total_fnr += FN/(FN+TP)
-        precision = TP/(TP+FP)
-        recall = TP/(TP+FN)
-        total_f1 += 2*(precision*recall)/(precision+recall)
+        total_fpr += fpr
+        total_fnr += fnr
+        total_precision += precision
+        total_recall += recall
+        total_f1 += f1
 
     total = len(noisy_files_list)
-    return total_fpr/total,  total_fnr/total, total_f1/total
-
+    return total_fpr/total,  total_fnr/total, total_f1/total, total_precision/total, total_recall/total
 
 if __name__ == "__main__":
     dataset_dir = '/media/administrator/Data/train-clean-100/val/LibriSpeech/dev-noisy'
-    fpr, fnr, f1 = baseline_metrics(dataset_dir)
+    fpr, fnr, f1, precision, recall = baseline_metrics(dataset_dir)
 
-    print(f'Baseline vad FPR = {fpr}, FNR = {fnr}, f1 = {f1}')
+    print(f'Baseline vad FPR = {fpr}, FNR = {fnr}, f1 = {f1}, precision = {precision}, recall = {recall}')
 

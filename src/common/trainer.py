@@ -261,6 +261,13 @@ class BaseTrainer:
         self.writer.add_figure(f"DetCurve", fig, epoch)
 
         eer_t, fpr_1_t, fnr_1_t, _, _, _ = self.get_thresholds(labels.reshape(-1), predicted.reshape(-1))
+
+        f1, _, _, precision, recall = metrics.get_f1(torch.tensor(predicted.reshape(-1) > eer_t), labels.reshape(-1))
+
+        self.writer.add_scalar(f"Validation/F1", f1, epoch)
+        self.writer.add_scalar(f"Validation/Precision", precision, epoch)
+        self.writer.add_scalar(f"Validation/recall", recall, epoch)
+
         self.thresholds = {'eer': eer_t,
                            'fpr_1': fpr_1_t,
                            'fnr_1': fnr_1_t}
@@ -281,6 +288,9 @@ class BaseTrainer:
             if self.rank == 0:
                 if epoch % self.validation_interval == 0:
                     print(f"[{timer.duration()} seconds] Training has finished, validation is in progress...")
+
+                    if self.save_checkpoint_interval != 0 and (epoch % self.save_checkpoint_interval == 0):
+                        self._save_checkpoint(epoch)
 
                     self._set_models_to_eval_mode()
                     metric_score = self._validation_epoch(epoch)

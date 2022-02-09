@@ -75,7 +75,7 @@ reduction = 'none'
 silent_weight = 4
 
 [optimizer]
-lr = 1e-4
+lr = 1e-3
 beta1 = 0.9
 beta2 = 0.999
 weight_decay = 1e-3
