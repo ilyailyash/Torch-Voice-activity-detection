@@ -27,5 +27,4 @@ conda activate <env>
 
 ## License
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/ilyailyash/Torch-Voice-activity-detection/LICENSE)
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]
