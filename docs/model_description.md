@@ -21,7 +21,7 @@ I used predictions of [webrtcvad](https://github.com/wiseman/py-webrtcvad) with 
 
 While using mode 3 for [webrtcvad](https://github.com/wiseman/py-webrtcvad) madel was overfitting hardly with 0.3-0.4 RocAuc loss on validation dataset.
 
-Probably for cleaner metrics I could use [Allingments for LibreSpeech](https://zenodo.org/record/2619474#.YgPae7pByUl) which contains time of silens, but this wasn't done due to time limitations. [Reference](https://github.com/asteroid-team/Libri_VAD)
+Probably for cleaner metrics I could use [Allingments for LibriSpeech](https://zenodo.org/record/2619474#.YgPae7pByUl) which contains time of silens, but this wasn't done due to time limitations. [Reference](https://github.com/asteroid-team/Libri_VAD)
 ## Loss function
 
 Binary Cross Entropy Loss ([nn.BCELoss](https://pytorch.org/docs/stable/generated/torch.nn.BCELoss.html)) was used as the training objective. 
