@@ -20,10 +20,16 @@ Install Anaconda or Miniconda, and then install conda and pip packages:
 conda create --name <env> --file requirements.txt
 conda activate <env>
 ```
+
 ## Documentation
 
 - [Model Description](docs/model_description.md)
 - [Getting Started](docs/getting_started.md)
+
+
+## Pretrain models:
+- [config/train/vad.toml](https://disk.yandex.ru/d/Z0wLhgbPiSe8kg)
+- [config/train/vad_360.toml](https://disk.yandex.ru/d/FylZoIz8CtogKw)
 
 ## License
 
