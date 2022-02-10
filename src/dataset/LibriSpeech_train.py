@@ -88,9 +88,6 @@ class Dataset(BaseDataset):
         self.length = len(self.clean_dataset_list)
 
     def __len__(self):
-        # indexes = list(range(len(self.clean_dataset_list)))
-        # random.shuffle(indexes)
-        # self.clean_dataset_list = [self.clean_dataset_list[i] for i in indexes]
 
         return self.length
 

@@ -28,8 +28,13 @@ conda activate <env>
 
 
 ## Pretrain models:
-- [model for `config/train/vad.toml`](https://disk.yandex.ru/d/Z0wLhgbPiSe8kg)
-- [model for `config/train/vad_360.toml`](https://disk.yandex.ru/d/FylZoIz8CtogKw)
+
+| Model     | EER  | FPR with FNR = 1% | FNR with FPR = 1% |
+|-----------|------|-------------------|------------------|
+| [Model for `config/train/vad.toml`](https://disk.yandex.ru/d/Z0wLhgbPiSe8kg) | 9.9% | 82% | 17%              |
+| [Model for `config/train/vad_360.toml`](https://disk.yandex.ru/d/FylZoIz8CtogKw) | 9.4% | 80% | 15%              |
+
+Presented models are on training and will be updated soon.
 
 ## License
 

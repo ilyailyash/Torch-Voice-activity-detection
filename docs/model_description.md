@@ -2,7 +2,7 @@
 
 ## Inputs
 
-We get clean audio from LibriSpeech and with probability of 0.9 disturb it with Noise and RIR from DNS dataset.
+I get clean audio from LibriSpeech and with probability of 0.9 disturb it with Noise and RIR from DNS dataset.
 10% clean data in training set makes converges faster and more stable. 
 More details `src/dataset/LibriSpeech_train.py`
 
@@ -48,7 +48,7 @@ And used hints in parameters discovered in:
 - [Unsupervised Representation Learning for Speech Activity Detection in the Fearless Steps Challenge 2021](https://www.isca-speech.org/archive/pdfs/interspeech_2021/gimeno21_interspeech.pdf),
 - [A Lightweight Framework for Online Voice Activity Detection in the Wild](https://www.isca-speech.org/archive/pdfs/interspeech_2021/xu21b_interspeech.pdf)
 
-Also, good example of RT VAD is [Silero VAD](https://github.com/snakers4/silero-vad) which could be used for knowledge against [webrtcvad](https://github.com/wiseman/py-webrtcvad).
+Also, good example of RT VAD is [Silero VAD](https://github.com/snakers4/silero-vad) which could be used for knowledge distillation against [webrtcvad](https://github.com/wiseman/py-webrtcvad).
 
 Smaller model of 0.7M parameters contains 4 conv blocs with [32, 64, 128, 128] output channels and 1 LSTM layer and Looks Ahead on 1 frame which leeds to 20 < 40 mc time latency
 

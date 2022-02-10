@@ -40,8 +40,7 @@ def main(rank, world_size, config, resume):
         collate_fn=collate_fn
     )
 
-    # valid_dataloader = from_path(config["validation_dataset"]["args"]["dataset_dir_list"],
-    #                              config["train_dataset"]["dataloader"]["batch_size"])
+
     valid_dataloader = DataLoader(
         dataset=initialize_module(config["validation_dataset"]["path"],
                                   args=config["validation_dataset"]["args"]),
@@ -50,9 +49,6 @@ def main(rank, world_size, config, resume):
 
     model = initialize_module(config["model"]["path"], args=config["model"]["args"])
     model = DistributedDataParallel(model.to(rank), device_ids=[rank], find_unused_parameters=False)
-    # for name, param in model.named_parameters():
-    #     if not str.startswith(name, 'module.merge'):
-    #         param.requires_grad = False
 
     optimizer = torch.optim.AdamW(
         params=model.parameters(),
@@ -83,7 +79,7 @@ def main(rank, world_size, config, resume):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="PVT_SE")
+    parser = argparse.ArgumentParser(description="VAD")
     parser.add_argument("-C", "--configuration", required=True, type=str, help="Configuration (*.json5).")
     parser.add_argument("-P", "--preloaded_model_path", type=str, help="Path of the *.Pth file of the model.")
     parser.add_argument("-R", "--resume", action="store_true", help="Resume experiment from latest checkpoint.")
