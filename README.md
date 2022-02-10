@@ -36,6 +36,13 @@ conda activate <env>
 
 Presented models are on training and will be updated soon.
 
+### Comparator with baseline model
+
+| Model                                                | F1    |
+|------------------------------------------------------|-------|
+| [webrtcvad](https://github.com/wiseman/py-webrtcvad) | 0.945 |
+| Proposed                                             | 0.947 |
+
 ## License
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
