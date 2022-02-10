@@ -64,7 +64,7 @@ EER, FPR with 1% FNR and FNR with 1% FPR was calculated during validation. More 
 [python-compute-eer](https://github.com/YuanGongND/python-compute-eer)
 
 ## Optimisation
-Model was trained using [AdamW](https://pytorch.org/docs/stable/generated/torch.optim.AdamW.html) optimiser with LR=1e-4 and weight_decay=1e-3.
+Model was trained using [AdamW](https://pytorch.org/docs/stable/generated/torch.optim.AdamW.html) optimiser with LR=1e-3 and weight_decay=1e-3.
 
 [ReduceLROnPlateau](https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.ReduceLROnPlateau.html) was used as LR Scheduler.  
     
