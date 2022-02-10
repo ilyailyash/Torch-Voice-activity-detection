@@ -1,4 +1,4 @@
-inherit = "config/common/vad_100.toml"
+inherit = "config/common/vad_inference.toml"
 
 [model]
 path = "model.vad_model.CrnVad"

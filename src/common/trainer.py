@@ -2,14 +2,15 @@ import time
 from functools import partial
 from pathlib import Path
 
-import colorful
-from sklearn.metrics import DetCurveDisplay
-import matplotlib.pyplot as plt
-import numpy as np
+
 import toml
 import torch
+import colorful
+import numpy as np
+import matplotlib.pyplot as plt
 from joblib import Parallel, delayed
 from torch.cuda.amp import GradScaler
+from sklearn.metrics import DetCurveDisplay
 
 import src.util.metrics as metrics
 from src.util import visualization
@@ -166,8 +167,6 @@ class BaseTrainer:
         """
         print(f"\t Saving {epoch} epoch model checkpoint...")
 
-        # TODO
-        # 统一训练与推理时的处理方式："module.*"...
         state_dict = {
             "epoch": epoch,
             "best_score": self.best_score,
@@ -262,7 +261,7 @@ class BaseTrainer:
 
         eer_t, fpr_1_t, fnr_1_t, _, _, _ = self.get_thresholds(labels.reshape(-1), predicted.reshape(-1))
 
-        f1, _, _, precision, recall = metrics.get_f1(torch.tensor(predicted.reshape(-1) > eer_t), labels.reshape(-1))
+        f1, _, _, precision, recall = metrics.get_f1((predicted.reshape(-1) > eer_t).int(), labels.reshape(-1))
 
         self.writer.add_scalar(f"Validation/F1", f1, epoch)
         self.writer.add_scalar(f"Validation/Precision", precision, epoch)
