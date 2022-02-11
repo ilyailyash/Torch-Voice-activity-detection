@@ -1,6 +1,6 @@
 # Torch Voice activity detection
 
-This project has been created as a test task for employment.
+This project has been created as a test task for an employment.
 
 ## Clone
 
