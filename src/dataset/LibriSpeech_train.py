@@ -10,8 +10,7 @@ from tqdm import tqdm
 from glob import glob
 
 from src.common.dataset import BaseDataset
-from src.util.acoustic_utils import norm_amplitude, tailor_dB_FS, is_clipped, load_wav, read_wave, \
-     Frame, frame_generator
+from src.util.acoustic_utils import norm_amplitude, tailor_dB_FS, is_clipped, load_wav, read_wave, frame_generator
 
 
 class Dataset(BaseDataset):
@@ -88,7 +87,6 @@ class Dataset(BaseDataset):
         self.length = len(self.clean_dataset_list)
 
     def __len__(self):
-
         return self.length
 
     def _preload_dataset(self, file_path_list, remark=""):

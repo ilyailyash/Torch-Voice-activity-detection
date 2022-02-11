@@ -30,9 +30,9 @@ conda activate <env>
 ## Pretrain models:
 
 | Model     | EER  | FPR with FNR = 1% | FNR with FPR = 1% |
-|-----------|------|-------------------|------------------|
-| [Model for `config/train/vad.toml`](https://disk.yandex.ru/d/Z0wLhgbPiSe8kg) | 9.9% | 82% | 17%              |
-| [Model for `config/train/vad_360.toml`](https://disk.yandex.ru/d/FylZoIz8CtogKw) | 9.4% | 80% | 15%              |
+|-----------|------|-------------------|-------------------|
+| [Model for `config/train/vad.toml`](https://disk.yandex.ru/d/Z0wLhgbPiSe8kg) | 9.9% | 82%               | 17%               |
+| [Model for `config/train/vad_360.toml`](https://disk.yandex.ru/d/1Ozworln5biaeg) | 9.4% | 77.8%             | 13.3%             |
 
 Presented models are on training and will be updated soon.
 
@@ -41,7 +41,7 @@ Presented models are on training and will be updated soon.
 | Model                                                | F1    |
 |------------------------------------------------------|-------|
 | [webrtcvad](https://github.com/wiseman/py-webrtcvad) | 0.945 |
-| Proposed                                             | 0.947 |
+| Proposed                                             | 0.95  |
 
 ## License
 
